@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Summary for {{ movie.title }}</title>
+</head>
+<body>
+
+    <a href="{% url 'movie_list' %}">Home</a>
+    {% if user.is_authenticated and user.is_stuff %}
+    <a href="{% url 'movie_new' %}">Add new movie</a>
+    {% endif %}
+    <a href="{% url 'movie_news' %}">News</a>
+    <a href="{% url 'stats' %}">Statistics</a>
+    <a href="{% url 'about_us' %}">Learn about us</a>
+    <a href="{% url 'terms_of_use'%}">Terms of use</a>
+    <a href="{% url 'review_list'%}">Reviews</a>
+    <a href="{% url 'faq_list' %}">FAQ</a>
+    <a href="{% url 'promocode_list'%}">Promocodes</a>
+    <a href="{% url 'vacancy_list'%}">Work with us!</a>
+    <div class="header">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'sign_up' %}">Sign Up</a>
+        {% endif %}
+    </div>
+    <h1>Ticket Summary for {{ movie.title }}</h1>
+    <p>Hall: {{ hall.name }}</p>
+    <p>Showtime: {{ showtime }}</p>
+    <p>Number of Tickets: {{ ticket_count }}</p>
+    <p>Ticket Price per Ticket: ${{ ticket_price }}</p>
+    {% if promo_code %}
+        <p>Promo Code: {{ promo_code }}</p>
+        <p>Discounted Price: ${{ final_price }}</p>
+    {% else %}
+        <p>Total Price: ${{ final_price }}</p>
+    {% endif %}
+    <a href="{% url 'movie_list' %}">Back to Movies</a>
+</body>
+</html>

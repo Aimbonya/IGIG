@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+</head>
+<body>
+    <a href="{% url 'movie_list' %}">Home</a>
+    <a href="{% url 'movie_news' %}">News</a>
+    <a href="{% url 'stats' %}">Statistics</a>
+    <a href="{% url 'about_us' %}">Learn about us</a>
+    <a href="{% url 'terms_of_use'%}">Terms of use</a>
+    <a href="{% url 'review_list'%}">Reviews</a>
+    <a href="{% url 'faq_list' %}">FAQ</a>
+    <a href="{% url 'promocode_list'%}">Promocodes</a>
+    <a href="{% url 'vacancy_list'%}">Work with us!</a>
+    <div class="header">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'sign_up' %}">Sign Up</a>
+        {% endif %}
+    </div>
+    <h1>Statistics</h1>
+
+    <h2>List of Movies (Alphabetical Order)</h2>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Total Ticket Sales</h2>
+    <p>{{ total_sales }}</p>
+
+    <h2>Sales Statistics</h2>
+    <p>Average Sales: {{ avg_sales }}</p>
+    <p>Median Sales: {{ median_sales }}</p>
+    <p>Mode Sales: {{ mode_sales }}</p>
+
+    <h2>Most Popular Genre</h2>
+    <p>{{ popular_genre }}</p>
+
+    <h2>Most Profitable Genre</h2>
+    <p>{{ profitable_genre }}</p>
+
+    <h2>Total income from ticket sales</h2>
+    <p>{{total_profit}}</p>
+
+    <h2>Ticket Sales per Movie</h2>
+    <img src="data:image/png;base64,{{ graphic }}" alt="Ticket Sales per Movie">
+
+</body>
+</html>

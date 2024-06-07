@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+</head>
+<body>
+    <a href="{% url 'movie_list' %}">Home</a>
+    <a href="{% url 'movie_news' %}">News</a>
+    <a href="{% url 'stats' %}">Statistics</a>
+    <a href="{% url 'about_us' %}">Learn about us</a>
+    <a href="{% url 'terms_of_use'%}">Terms of use</a>
+    <a href="{% url 'review_list'%}">Reviews</a>
+    <a href="{% url 'faq_list' %}">FAQ</a>
+    <a href="{% url 'promocode_list'%}">Promocodes</a>
+    <a href="{% url 'vacancy_list'%}">Work with us!</a>
+    <div class="header">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'sign_up' %}">Sign Up</a>
+        {% endif %}
+    </div>
+    <h1>Reviews</h1>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <p> {{ review.user.username }}:</p>
+                <p>{{ review.text }}</p>
+                <p>Rating: {{ review.rating }}</p>
+                <p>Date: {{ review.date }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <a href="{% url 'review_new' %}">Add a Review</a>
+    {% endif %}
+</body>
+</html>

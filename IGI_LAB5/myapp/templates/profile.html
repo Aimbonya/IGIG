@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h2>Your Tickets</h2>
+    <ul>
+        {% for ticket in tickets %}
+            <li>
+                {{ ticket.ticket_count }} tickets for {{ ticket.showtime.movie.title }} at {{ ticket.showtime.datetime }} in {{ ticket.showtime.hall.name }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
